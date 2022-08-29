@@ -2,6 +2,7 @@
  * Module:  DBInit.java
  * Author:  El Hadji M. NDONGO
  * Purpose: prepopulate the database
+ * Date: 29 August 2022
  ***********************************************************************/
 package com.opengeography.config;
 

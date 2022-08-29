@@ -2,7 +2,7 @@
  * Module:  ContinentRepository.java
  * Author:  El Hadji M. NDONGO
  * Purpose: Defines the Repository of Continent
- * Date: 8/29/2022
+ * Date: 29 August 2022
  * Project: openGeography
  ***********************************************************************/
 

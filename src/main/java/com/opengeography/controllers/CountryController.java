@@ -5,8 +5,8 @@
  ***********************************************************************/
 package com.opengeography.controllers;
 
-import com.opengeography.entities.Continent;
 import com.opengeography.entities.Country;
+import com.opengeography.exceptions.NotFoundException;
 import com.opengeography.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class CountryController {
     }
 
     @GetMapping("/countries/{id}")
-    public Optional<Country> getOne(@PathVariable Long id) {
+    public Country getOne(@PathVariable Long id) throws NotFoundException {
         return  countryService.getOne(id);
     }
 

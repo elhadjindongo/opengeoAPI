@@ -2,6 +2,7 @@
  * Module:  Country.java
  * Author:  El Hadji M. NDONGO
  * Purpose: Defines the Class Country
+ * Date: 29 August 2022
  ***********************************************************************/
 
 package com.opengeography.entities;

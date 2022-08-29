@@ -2,6 +2,7 @@
  * Module:  ContinentController.java
  * Author:  El Hadji M. NDONGO
  * Purpose: Defines the Controller for Continent
+ * Date: 29 August 2022
  ***********************************************************************/
 
 package com.opengeography.controllers;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +30,7 @@ public class ContinentController {
     }
 
     @GetMapping("/continents/{id}")
-    public Optional<Continent> getOne(@PathVariable Long id) {
+    public Continent getOne(@PathVariable Long id) {
         return  continentService.getOne(id);
     }
 }

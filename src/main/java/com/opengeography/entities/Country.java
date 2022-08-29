@@ -4,19 +4,20 @@
  * Purpose: Defines the Class Country
  ***********************************************************************/
 
-package com.opengeography.openGeography.entities;
+package com.opengeography.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor @ToString
 @Entity
 @Table(name = "COUNTRY")
 public class Country {
-   @Id
+   @Id @GeneratedValue
    private Long id;
    @Column(length = 100)
    private String name;
@@ -34,4 +35,13 @@ public class Country {
    @ManyToOne
    public Continent continent;
 
+   public Country(String name, String fullName, String codeAlpha2, String codeAlpha3, String phone, String capitalCity, Continent continent) {
+      this.name = name;
+      this.fullName = fullName;
+      this.codeAlpha2 = codeAlpha2;
+      this.codeAlpha3 = codeAlpha3;
+      this.phone = phone;
+      this.capitalCity = capitalCity;
+      this.continent = continent;
+   }
 }

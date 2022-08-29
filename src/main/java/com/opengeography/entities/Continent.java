@@ -4,25 +4,32 @@
  * Purpose: Defines the Class Continent
  ***********************************************************************/
 
-package com.opengeography.openGeography.entities ;
+package com.opengeography.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Collection;
 
-@Data @Inheritance @Table(name = "CONTINENT")
+@Data @ToString @NoArgsConstructor
+@AllArgsConstructor
+@Entity @Table(name = "CONTINENT")
 public class Continent {
-   @Id
+   @Id @GeneratedValue
    private Long id;
    @Column(length = 100)
    private String name;
-   private float area;
+   @Column(length = 25)
+   private String area;
    @Column(name = "total_countries")
    private int totalCountries;
 
-   @OneToMany(mappedBy = "continent",orphanRemoval = true)
-   public Collection<Country> country;
- 
 
+   public Continent(String name, String area, int totalCountries) {
+      this.name = name;
+      this.area = area;
+      this.totalCountries = totalCountries;
+   }
 }

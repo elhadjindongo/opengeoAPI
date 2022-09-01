@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.opengeography.utils.Utils.s_CODE;
 import static com.opengeography.utils.Utils.s_COUNTRY;
 
 @RestController
@@ -43,7 +44,7 @@ public class CountryController {
                 country.add(countryService.getOneByCodeApha3(code));
                 return country;
             } else {
-                throw new NotFoundException(s_COUNTRY, code);
+                throw new NotFoundException(s_COUNTRY, s_CODE,code);
             }
         }
         return countryService.getAll();

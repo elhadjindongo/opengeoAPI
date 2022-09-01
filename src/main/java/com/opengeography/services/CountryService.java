@@ -9,13 +9,12 @@ package com.opengeography.services;
 import com.opengeography.entities.Country;
 import com.opengeography.exceptions.NotFoundException;
 import com.opengeography.repositories.CountryRepository;
-import com.opengeography.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.opengeography.utils.Utils.s_COUNTRY;
+import static com.opengeography.utils.Utils.*;
 
 @Service
 public class CountryService {
@@ -32,37 +31,34 @@ public class CountryService {
     }
 
     public Country getOneByName(String name) {
-        if (name.isEmpty()) {
-            throw new NotFoundException(s_COUNTRY, name);
-        }
-        name = Utils.toCamelCase(name);
+        name = validateName(name, s_COUNTRY);
         Country country = countryRepository.findOneByName(name);
         if (null == country) {
-            throw new NotFoundException(s_COUNTRY, name);
+            throw new NotFoundException(s_COUNTRY,s_NAME, name);
         }
         return country;
     }
 
     public Country getOneByCodeApha2(String code) {
-        if (code.length() != 2) {
-            throw new NotFoundException(s_COUNTRY, code);
+        if (code.length() != s_TWO || !isWord(code)) {
+            throw new NotFoundException(s_COUNTRY, s_CODE, code);
         }
         code = code.toUpperCase();
         Country country = countryRepository.findOneByCodeAlpha2(code);
         if (null == country) {
-            throw new NotFoundException(s_COUNTRY, code);
+            throw new NotFoundException(s_COUNTRY, s_CODE, code);
         }
         return country;
     }
 
     public Country getOneByCodeApha3(String code) {
-        if (code.length() != 3) {
-            throw new NotFoundException(s_COUNTRY, code);
+        if (code.length() != s_THREE || !isWord(code)) {
+            throw new NotFoundException(s_COUNTRY, s_CODE, code);
         }
         code = code.toUpperCase();
         Country country = countryRepository.findOneByCodeAlpha3(code);
         if (null == country) {
-            throw new NotFoundException(s_COUNTRY, code);
+            throw new NotFoundException(s_COUNTRY, s_CODE, code);
         }
         return country;
     }

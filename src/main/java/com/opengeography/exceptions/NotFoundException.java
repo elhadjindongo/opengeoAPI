@@ -12,7 +12,7 @@ public class NotFoundException extends RuntimeException {
         super(entity + " with id = " + id + " doesn't exist !");
     }
 
-    public NotFoundException(String entity, String name) {
-        super(entity + " with the name " + name + " doesn't exist !");
+    public NotFoundException(String entity,String field, String name) {
+        super(entity + " with the "+field+" " + name + " doesn't exist !");
     }
 }

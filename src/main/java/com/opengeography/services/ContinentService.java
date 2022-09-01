@@ -18,12 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-import static com.opengeography.utils.Utils.s_CONTINENT;
-import static com.opengeography.utils.Utils.toCamelCase;
+import static com.opengeography.utils.Utils.*;
 
 @Service
 public class ContinentService {
-    private static final String s_ONLY_LETTERS_REGEX = "^$/w";
     private static final Logger log = LoggerFactory.getLogger(DBInit.class);
 
     @Autowired
@@ -49,21 +47,10 @@ public class ContinentService {
      * @return a continent that has the exact name given in param
      */
     public Continent getOneByName(String name) {
-        //protect against code injection
-        //a name is one word with only alphabetical letters
-//        log.info("****************************" + name.matches(s_ONLY_LETTERS_REGEX));
-//        if (!name.matches(s_ONLY_LETTERS_REGEX)) {
-//            throw new NotFoundException(s_CONTINENT, name);
-//        }
-        //convert the name  to lowerCase with the first letter in uppercase
-        name = toCamelCase(name);
-
-        if (name.isEmpty()) {
-            throw new NotFoundException(s_CONTINENT, name);
-        }
+        name = validateName(name,s_CONTINENT);
         Continent continent = continentRepository.findOneByName(name);
         if (null == continent) {
-            throw new NotFoundException(s_CONTINENT, name);
+            throw new NotFoundException(s_CONTINENT,s_NAME, name);
         }
         return continent;
     }

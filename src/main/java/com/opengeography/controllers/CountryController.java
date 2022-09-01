@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.opengeography.utils.Utils.s_CODE;
-import static com.opengeography.utils.Utils.s_COUNTRY;
+import static com.opengeography.utils.Utils.*;
 
 @RestController
 public class CountryController {
@@ -28,7 +27,8 @@ public class CountryController {
     @GetMapping("/countries")
     public List<Country> getAll(
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String code
+            @RequestParam(required = false) String code,
+            @RequestParam(required = false) String capital
     ) {
         if (null != name) {
             List<Country> country = new ArrayList<>();
@@ -37,15 +37,20 @@ public class CountryController {
         }
         if (null != code) {
             List<Country> country = new ArrayList<>();
-            if (code.length() == 2) {
+            if (code.length() == s_TWO) {
                 country.add(countryService.getOneByCodeApha2(code));
                 return country;
-            } else if (code.length() == 3) {
+            } else if (code.length() == s_THREE) {
                 country.add(countryService.getOneByCodeApha3(code));
                 return country;
             } else {
-                throw new NotFoundException(s_COUNTRY, s_CODE,code);
+                throw new NotFoundException(s_COUNTRY, s_CODE, code);
             }
+        }
+        if (null != capital) {
+            List<Country> country = new ArrayList<>();
+            country.add(countryService.getOneByCapitalCity(capital));
+            return country;
         }
         return countryService.getAll();
     }

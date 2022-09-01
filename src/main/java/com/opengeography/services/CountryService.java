@@ -62,4 +62,19 @@ public class CountryService {
         }
         return country;
     }
+
+    public Country getOneByPhone(String phone) {
+        //TODO
+        return null;
+    }
+
+    public Country getOneByCapitalCity(String city) {
+        city = validateName(city, s_CITY);
+        Country country = countryRepository.findOneByCapitalCityContains(city);
+        if (null == country) {
+            throw new NotFoundException(s_COUNTRY,s_CITY, city);
+        }
+        return country;
+    }
+
 }

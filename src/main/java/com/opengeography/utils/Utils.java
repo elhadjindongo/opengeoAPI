@@ -13,9 +13,13 @@ public class Utils {
 
     public static final String s_CONTINENT = "Continent";
     public static final String s_COUNTRY = "Country";
+    public static final String s_CITY = "Capital City";
     public static final String s_NAME = "name";
     public static final String s_CODE = "code alpha";
     private static final String s_ONLY_LETTERS_REGEX = "[a-zA-Z]+";
+    public static final char s_PLUS_SIGN= '+';
+    public static final int s_ZERO = 0;
+    public static final int s_ONE = 1;
     public static final int s_TWO = 2;
     public static final int s_THREE = 3;
 
@@ -53,6 +57,15 @@ public class Utils {
             throw new NotValidNameException(entity, name);
         }
         return name = Utils.toCamelCase(name);
+    }
+
+    public static String validatePhone(String phone) {
+        //remove 00 and +
+        if (phone.charAt(s_ZERO) == s_PLUS_SIGN) {
+            phone = phone.substring(s_ONE);
+        }
+        //TODO: remove 00 if exist and make sure phone contains only numbers
+        return null;
     }
 
 }

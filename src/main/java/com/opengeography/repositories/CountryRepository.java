@@ -24,5 +24,5 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
 
     Country findOneByCapitalCityContains(String city);
 
-    List<Country> findAllByContinent(String continent);
+    //find by continent
 }

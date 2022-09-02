@@ -2,7 +2,7 @@
  * Module:  Continent.java
  * Author:  El Hadji M. NDONGO
  * Purpose: Defines the Exception advice for NotFoundException
- * Date: 29 August 2022
+ * Date: 1st September 2022
  ***********************************************************************/
 
 package com.opengeography.exceptions;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class NotFoundAdvice {
     @ResponseBody
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler({NotFoundException.class,NotValidNameException.class,NotValidPhonePrefixException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String notFoundHandler(NotFoundException ex) {
+    String notFoundExceptionHandler(RuntimeException ex) {
         return ex.getMessage();
     }
 }

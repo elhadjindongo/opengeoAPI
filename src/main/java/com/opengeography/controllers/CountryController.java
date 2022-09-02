@@ -28,7 +28,8 @@ public class CountryController {
     public List<Country> getAll(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String code,
-            @RequestParam(required = false) String capital
+            @RequestParam(required = false) String capital,
+            @RequestParam(required = false) String phone
     ) {
         if (null != name) {
             List<Country> country = new ArrayList<>();
@@ -50,6 +51,11 @@ public class CountryController {
         if (null != capital) {
             List<Country> country = new ArrayList<>();
             country.add(countryService.getOneByCapitalCity(capital));
+            return country;
+        }
+        if (null != phone) {
+            List<Country> country = new ArrayList<>();
+            country.add(countryService.getOneByPhone(phone));
             return country;
         }
         return countryService.getAll();

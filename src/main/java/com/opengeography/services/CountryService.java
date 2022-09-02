@@ -34,7 +34,7 @@ public class CountryService {
         name = validateName(name, s_COUNTRY);
         Country country = countryRepository.findOneByName(name);
         if (null == country) {
-            throw new NotFoundException(s_COUNTRY,s_NAME, name);
+            throw new NotFoundException(s_COUNTRY, s_NAME, name);
         }
         return country;
     }
@@ -64,15 +64,19 @@ public class CountryService {
     }
 
     public Country getOneByPhone(String phone) {
-        //TODO
-        return null;
+        String prefix = validatePhone(phone);
+        Country country = countryRepository.findOneByPhone(prefix);
+        if (null == country) {
+            throw new NotFoundException(s_COUNTRY, "phone prefix ", phone);
+        }
+        return country;
     }
 
     public Country getOneByCapitalCity(String city) {
         city = validateName(city, s_CITY);
         Country country = countryRepository.findOneByCapitalCityContains(city);
         if (null == country) {
-            throw new NotFoundException(s_COUNTRY,s_CITY, city);
+            throw new NotFoundException(s_COUNTRY, s_CITY, city);
         }
         return country;
     }

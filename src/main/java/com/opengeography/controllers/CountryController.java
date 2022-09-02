@@ -29,34 +29,35 @@ public class CountryController {
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String code,
             @RequestParam(required = false) String capital,
-            @RequestParam(required = false) String phone
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String continent
     ) {
+        List<Country> countries = new ArrayList<>();
         if (null != name) {
-            List<Country> country = new ArrayList<>();
-            country.add(countryService.getOneByName(name));
-            return country;
+            countries.add(countryService.getOneByName(name));
+            return countries;
         }
         if (null != code) {
-            List<Country> country = new ArrayList<>();
             if (code.length() == s_TWO) {
-                country.add(countryService.getOneByCodeApha2(code));
-                return country;
+                countries.add(countryService.getOneByCodeApha2(code));
+                return countries;
             } else if (code.length() == s_THREE) {
-                country.add(countryService.getOneByCodeApha3(code));
-                return country;
+                countries.add(countryService.getOneByCodeApha3(code));
+                return countries;
             } else {
                 throw new NotFoundException(s_COUNTRY, s_CODE, code);
             }
         }
         if (null != capital) {
-            List<Country> country = new ArrayList<>();
-            country.add(countryService.getOneByCapitalCity(capital));
-            return country;
+            countries.add(countryService.getOneByCapitalCity(capital));
+            return countries;
         }
         if (null != phone) {
-            List<Country> country = new ArrayList<>();
-            country.add(countryService.getOneByPhone(phone));
-            return country;
+            countries.add(countryService.getOneByPhone(phone));
+            return countries;
+        }
+        if (null != continent) {
+            return countryService.getAllByContinent(continent);
         }
         return countryService.getAll();
     }

@@ -8,8 +8,11 @@
 
 package com.opengeography.repositories;
 
+import com.opengeography.entities.Continent;
 import com.opengeography.entities.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
@@ -23,5 +26,5 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
 
     Country findOneByCapitalCityContains(String city);
 
-    //find by continent
+    List<Country> findAllByContinent(Continent continent);
 }

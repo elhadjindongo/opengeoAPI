@@ -6,6 +6,7 @@
  ***********************************************************************/
 package com.opengeography.services;
 
+import com.opengeography.entities.Continent;
 import com.opengeography.entities.Country;
 import com.opengeography.exceptions.NotFoundException;
 import com.opengeography.repositories.CountryRepository;
@@ -20,6 +21,9 @@ import static com.opengeography.utils.Utils.*;
 public class CountryService {
     @Autowired
     private CountryRepository countryRepository;
+
+    @Autowired
+    private ContinentService continentService;
 
 
     public List<Country> getAll() {
@@ -81,4 +85,10 @@ public class CountryService {
         return country;
     }
 
+    public List<Country> getAllByContinent(String continentName) {
+        //getting the continent
+        Continent continent = continentService.getOneByName(continentName);
+        //getting all the countries
+        return countryRepository.findAllByContinent(continent);
+    }
 }

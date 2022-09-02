@@ -23,13 +23,13 @@ public class Country {
    @Column(length = 100)
    private String name;
    @Column(name = "full_name")
-   private String fullName; // nom du pays version longue  / country's name in long  version
+   private String fullName; // nom du pays version longue  | country's name in long  version
    @Column(name = "code_alpha2",length = 2)
    private String codeAlpha2;
    @Column(name = "code_alpha3",length = 3)
    private String codeAlpha3;
    @Column(length = 8)
-   private String phone; // indicatif telephonique / Phone prefix
+   private String phone; // indicatif telephonique | Phone prefix
    @Column(name = "capital_city",length = 100)
    private String capitalCity;
 

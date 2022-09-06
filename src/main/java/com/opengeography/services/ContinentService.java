@@ -6,7 +6,7 @@
  ***********************************************************************/
 package com.opengeography.services;
 
-import com.opengeography.config.DBInit;
+import com.opengeography.config.DBInitDev;
 import com.opengeography.entities.Continent;
 import com.opengeography.exceptions.NotFoundException;
 import com.opengeography.repositories.ContinentRepository;
@@ -22,7 +22,7 @@ import static com.opengeography.utils.Utils.*;
 
 @Service
 public class ContinentService {
-    private static final Logger log = LoggerFactory.getLogger(DBInit.class);
+    private static final Logger log = LoggerFactory.getLogger(DBInitDev.class);
 
     @Autowired
     private ContinentRepository continentRepository;

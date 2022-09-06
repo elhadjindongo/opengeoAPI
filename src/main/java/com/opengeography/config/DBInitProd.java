@@ -1,0 +1,241 @@
+/***********************************************************************
+ * Module:  DBInit.java
+ * Author:  El Hadji M. NDONGO
+ * Purpose: prepopulate the database for production env.
+ * Date: 5th September 2022
+ ***********************************************************************/
+package com.opengeography.config;
+
+import com.opengeography.entities.Continent;
+import com.opengeography.entities.Country;
+import com.opengeography.repositories.ContinentRepository;
+import com.opengeography.repositories.CountryRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
+@Configuration
+public class DBInitProd {
+    private static final Logger log = LoggerFactory.getLogger(DBInitProd.class);
+
+
+    @Bean
+    CommandLineRunner loadProd(ContinentRepository continentRepository, CountryRepository countryRepository) {
+        return args -> {
+            log.info("----------------------- Preloading Continents ------------------------------------");
+
+            Continent asie = continentRepository.save(new Continent("Asie", "44579000 km2", "30 %", "4436224000", "60,2 %", 99.51, 47));
+            Continent afrique = continentRepository.save(new Continent("Afrique", "30065000 km2", "20 %", "1216130000", "16,5 %", 40.45, 54));
+            Continent ameriqueNorth = continentRepository.save(new Continent("Amérique du Nord", "24256000 km2", "16 %", "528750000", "7,2 %", 21.80, 23));
+            Continent amerique = continentRepository.save(new Continent("Amérique du Sud", "17819000 km2", "12 %", "410013492", "5,6 %", 22.93, 12));
+            Continent antarctique = continentRepository.save(new Continent("Antarctique", "13209000 km2", "9 %", "1200", "0,00002 %", 0001, 0));
+            Continent europe = continentRepository.save(new Continent("Europe", "9938000 km2", "7 %", "738849000", "10,0 %", 74.35, 45));
+            Continent oceanie = continentRepository.save(new Continent("Océanie", "7687000 km2", "5 %", "39901000", "0,5 %", 5.19, 14));
+
+            log.info("----------------------- Preloading Countries ------------------------------------");
+
+            countryRepository.save(new Country("+93", "AFG", "AF", "Afghanistan", "Kaboul", asie, "Émirat islamique d'Afghanistan", "652 090 km2"));
+            countryRepository.save(new Country("+27", "ZAF", "ZA", "afrique du Sud", "Pretoria", afrique, "République d'afrique du Sud (CNT, L, PRm, SS, UE) République sud-africaine (OIT, ONU, SQ)", "1 221 037 km2"));
+            countryRepository.save(new Country("+355", "ALB", "AL", "Albanie", "Tirana", europe, "République d'Albanie", "28 748 km2"));
+            countryRepository.save(new Country("+213", "DZA", "DZ", "Algérie", "Alger", afrique, "République algérienne démocratique et populaire (OIT, ONU, PR, SQ, SS, UE) République algérienne démocratique populaire (CNT) République démocratique et populaire d'Algérie (L)", "2 381 741 km2"));
+            countryRepository.save(new Country("+49", "DEU", "DE", "Allemagne", "Berlin", europe, "République fédérale d'Allemagne", "357 021 km2"));
+            countryRepository.save(new Country("+376", "AND", "AD", "Andorre", "Andorre-la-Vieille", europe, "Principauté d'Andorre", "468 km2"));
+            countryRepository.save(new Country("+244", "AGO", "AO", "Angola", "Luanda", afrique, "République d'Angola", "1 246 700 km2"));
+            countryRepository.save(new Country("+1268", "ATG", "AG", "Antigua-et-Barbuda", "Saint John's", amerique, "", "442 km2"));
+            countryRepository.save(new Country("+966", "SAU", "SA", "Arabie Saoudite", "Riyad", asie, "Royaume d'Arabie saoudite (Lm, PRm)", "2 149 680 km2"));
+            countryRepository.save(new Country("+54", "ARG", "AR", "Argentine", "Buenos Aires", amerique, "République argentine", "2 780 400 km2"));
+            countryRepository.save(new Country("+374", "ARM", "AM", "Arménie", "Erevan", asie, "République d'Arménie", "29 743 km2"));
+            countryRepository.save(new Country("+61", "AUS", "AU", "Australie", "Canberra", oceanie, "Australie Commonwealth d'Australie (UE)", "7 692 060 km2"));
+            countryRepository.save(new Country("+43", "AUT", "AT", "Autriche", "Vienne", europe, "République d'Autriche", "83 871 km2"));
+            countryRepository.save(new Country("+994", "AZE", "AZ", "Azerbaïdjan", "Bakou", asie, "République d'Azerbaïdjan", "86 600 km2"));
+            countryRepository.save(new Country("+1242", "BHS", "BS", "Bahamas", "Nassau", amerique, "Commonwealth des Bahamas", "13 943 km2"));
+            countryRepository.save(new Country("+973", "BHR", "BH", "Bahreïn", "Manama", asie, "Royaume de Bahreïn", "758 km2"));
+            countryRepository.save(new Country("+880", "BGD", "BD", "Bangladesh", "Dacca", asie, "République populaire du Bangladesh", "143 998 km2"));
+            countryRepository.save(new Country("+1246", "BRB", "BB", "Barbade", "Bridgetown", amerique, "", "430 km2"));
+            countryRepository.save(new Country("+32", "BEL", "BE", "Belgique", "Bruxelles", europe, "Royaume de Belgique", "30 528 km2"));
+            countryRepository.save(new Country("+501", "BLZ", "BZ", "Belize", "Belmopan", amerique, "", "22 966 km2"));
+            countryRepository.save(new Country("+229", "BEN", "BJ", "Bénin", "Porto-Novo", afrique, "République du Bénin", "114 763 km2"));
+            countryRepository.save(new Country("+975", "BTN", "BT", "Bhoutan", "Thimbu", asie, "Royaume du Bhoutan", "38 394 km2"));
+            countryRepository.save(new Country("+375", "BLR", "BY", "Biélorussie", "Minsk", europe, "République du Bélarus (OIT, ONU, SQ, SS) République de Biélorussie (CNT, L, PRm, UE)", "207 600 km2"));
+            countryRepository.save(new Country("+95", "NMR", "NM", "Birmanie(Myanmar)", "Naypyidaw", asie, "République de l'Union du Myanmar (L, OIT, ONU, SQ, SS) Myanmar/Birmanie (UE)", "676 578 km2"));
+            countryRepository.save(new Country("+591", "BOL", "BO", "Bolivie", "Sucre", amerique, "État plurinational de Bolivie", "1 098 581 km2"));
+            countryRepository.save(new Country("+387", "BIH", "BA", "Bosnie-Herzégovine", "Sarajevo", europe, "", "51 197 km2"));
+            countryRepository.save(new Country("+267", "BWA", "BW", "Botswana", "Gaborone", afrique, "", "582 000 km2"));
+            countryRepository.save(new Country("+55", "BRA", "BR", "Brésil", "Brasilia", amerique, "République fédérative du Brésil", "8 515 767 km2"));
+            countryRepository.save(new Country("+673", "BRN", "BN", "Brunei Bandar Seri", "Begawan", asie, "Brunéi Darussalam", "5 765 km2"));
+            countryRepository.save(new Country("+359", "BGR", "BG", "Bulgarie", "Sofia", europe, "", "110 879 km2"));
+            countryRepository.save(new Country("+226", "BFA", "BF", "Burkina Faso", "Ouagadougou", afrique, "République du Burkina (L)", "272 967 km2"));
+            countryRepository.save(new Country("+257", "BDI", "BI", "Burundi", "Bujumbura", afrique, "République du Burundi (PRm)", "27 834 km2"));
+            countryRepository.save(new Country("+855", "KHM", "KH", "Cambodge", "Phnom Penh", asie, "Royaume du Cambodge (Lm, PRm)", "181 035 km2"));
+            countryRepository.save(new Country("+237", "CMR", "CM", "Cameroun", "Yaoundé", afrique, "République du Cameroun (PRm)", "475 442 km2"));
+            countryRepository.save(new Country("+1", "CAN", "CA", "Canada", "Ottawa", ameriqueNorth, "", "9 984 670 km2"));
+            countryRepository.save(new Country("+238", "CPV", "CV", "Cap-Vert(Cabo Verde)", "Praia", afrique, "République du Cap-Vert (CNT, L, PRm, UE) République de Cabo Verde (OIT, ONU, SQ) République du Cabo Verde (SS)", "4 033 km2"));
+            countryRepository.save(new Country("+236", "CAF", "CF", "Centrafrique", "Bangui", afrique, "République centrafricaine", "622 984 km2"));
+            countryRepository.save(new Country("+56", "CHL", "CL", "Chili", "Santiago", amerique, "République du Chili", "756 102 km2"));
+            countryRepository.save(new Country("+86", "CHN", "CN", "Chine", "Pékin", asie, "République populaire de Chine", "9 600 000 km2"));
+            countryRepository.save(new Country("+357", "CYP", "CY", "Chypre", "Nicosie", europe, "République de Chypre (PRm)", "9 251 km2"));
+            countryRepository.save(new Country("+57", "COL", "CO", "Colombie", "Bogota", amerique, "République de Colombie (PRm)", "1 141 748 km2"));
+            countryRepository.save(new Country("+269", "COM", "KM", "Comores", "Moroni", afrique, "Union des Comores", "2 236 km2"));
+            countryRepository.save(new Country("+242", "COG", "CG", "Congo", "Brazzaville", afrique, "République du Congo (PRm)", "342 000 km2"));
+            countryRepository.save(new Country("+850", "PRK", "KP", "Corée du Nord", "Pyongyang", asie, "République populaire démocratique de Corée", "120 538 km2"));
+            countryRepository.save(new Country("+82", "KOR", "KR", "Corée du Sud", "Séoul", asie, "République de Corée (PRm)", "99 828 km2"));
+            countryRepository.save(new Country("+506", "CRI", "CR", "Costa Rica", "San José", amerique, "République du Costa Rica (PRm)", "51 100 km2"));
+            countryRepository.save(new Country("+225", "CIV", "CI", "Côte d'Ivoire", "Yamoussoukro", afrique, "République de Côte d'Ivoire (PRm)", "322 463 km2"));
+            countryRepository.save(new Country("+385", "HRV", "HR", "Croatie", "Zagreb", europe, "République de Croatie (PRm)", "56 594 km2"));
+            countryRepository.save(new Country("+53", "CUB", "CU", "Cuba", "La Havane", amerique, "République de Cuba (PRm)", "109 886 km2"));
+            countryRepository.save(new Country("+45", "DNK", "DK", "Danemark", "Copenhague", europe, "Royaume du Danemark (CNT, Lm, OIT, ONU, PRm, SQ) Royaume de Danemark (SS, UE)", "43 094 km2"));
+            countryRepository.save(new Country("+253", "DJI", "DJ", "Djibouti", "Djibouti", afrique, "République de Djibouti (PRm)", "23 200 km2"));
+            countryRepository.save(new Country("+1767", "DMA", "DM", "Dominique", "Roseau", amerique, "Commonwealth de Dominique", "751 km2"));
+            countryRepository.save(new Country("+20", "EGY", "EG", "Egypte", "Le Caire", afrique, "République arabe d'Égypte", "1 002 450 km2"));
+            countryRepository.save(new Country("+971", "ARE", "AE", "Emirats Arabes Unis", "Abu Dhabi", asie, "", "83 600 km2"));
+            countryRepository.save(new Country("+593", "ECU", "EC", "Equateur", "Quito", amerique, "République de l'Équateur (L, OIT, ONU, SQ, SS, UE) République d'Équateur (CNT, PR)", "256 369 km2"));
+            countryRepository.save(new Country("+291", "ERI", "ER", "Erythrée", "Asmara", afrique, "État d'Érythrée (CNT, L, SQ, SS, UE)", "117 600 km2"));
+            countryRepository.save(new Country("+34", "ESP", "ES", "Espagne", "Madrid", europe, "Royaume d'Espagne (Lm, PRm)", "510 000 km2"));
+            countryRepository.save(new Country("+372", "EST", "EE", "Estonie", "Tallinn", europe, "République d'Estonie (PRm)", "45 339 km2"));
+            countryRepository.save(new Country("+268", "SWZ", "SZ", "Eswatini", "Mbabane", afrique, "Royaume d’Eswatini (OIT, ONU, SS, UE) Royaume du Swaziland (CNT, Lm, PR, SQ)", "17 364 km2"));
+            countryRepository.save(new Country("+1", "USA", "US", "Etats-Unis", "Washington", ameriqueNorth, "États-Unis d'amerique", "9 629 091 km2"));
+            countryRepository.save(new Country("+251", "ETH", "ET", "Ethiopie", "Addis-Abeba", afrique, "République démocratique fédérale d'Éthiopie (CNT, L, UE) République fédérale démocratique d'Éthiopie (OIT, ONU, SQ, SS)", "1 104 300 km2"));
+            countryRepository.save(new Country("+679", "FJI", "FJ", "Fidji", "Suva", oceanie, "République des Fidji (CNT, L, PRm, SQ, SS, UE) République des Îles Fidji (OIT, ONU)", "18 272 km2"));
+            countryRepository.save(new Country("+358", "FIN", "FI", "Finlande", "Helsinki", europe, "République de Finlande (PRm)", "338 424 km2"));
+            countryRepository.save(new Country("+33", "FRA", "FR", "France", "Paris", europe, "République française", "551 695 km2"));
+            countryRepository.save(new Country("+241", "GAB", "GA", "Gabon", "Libreville", afrique, "République gabonaise", "267 668 km2"));
+            countryRepository.save(new Country("+220", "GMB", "GM", "Gambie", ",Banjul", afrique, "République de Gambie (PRm)", "11 295 km2"));
+            countryRepository.save(new Country("+995", "GEO", "GE", "Géorgie", "Tbilissi", asie, "République de Géorgie (L)", "69 700 km2"));
+            countryRepository.save(new Country("+233", "GHA", "GH", "Ghana", "Accra", afrique, "République du Ghana (PRm)", "238 533 km2"));
+            countryRepository.save(new Country("+30", "GRC", "GR", "Grèce", "Athènes", europe, "République hellénique", "131 957 km2"));
+            countryRepository.save(new Country("+1473", "GRD", "GD", "Grenade", "Saint George's", amerique, "", "344 km2"));
+            countryRepository.save(new Country("+502", "GTM", "GT", "Guatemala", "Guatemala", amerique, "République du Guatemala", "108 889 km2"));
+            countryRepository.save(new Country("+224", "GIN", "GN", "Guinée", "Conakry", afrique, "", "245 857 km2"));
+            countryRepository.save(new Country("+240", "GNQ", "GQ", "Guinée équatoriale", "Malabo", afrique, "République de Guinée équatoriale", "28 051 km2"));
+            countryRepository.save(new Country("+245", "GNB", "GW", "Guinée-Bissau", "Bissau", afrique, "République de Guinée-Bissau", "36 125 km2"));
+            countryRepository.save(new Country("+592", "GUF", "GF", "Guyana", "Georgetown", amerique, "République coopérative du Guyana", "214 969 km2"));
+            countryRepository.save(new Country("+509", "HTI", "HT", "Haïti", "Port-au-Prince", amerique, "République d'Haïti (PRm)", "27 750 km2"));
+            countryRepository.save(new Country("+504", "HND", "HN", "Honduras", "Tegucigalpa", amerique, "République du Honduras (PRm)", "112 492 km2"));
+            countryRepository.save(new Country("+36", "HUN", "HU", "Hongrie", "Budapest", europe, "", "93 028 km2"));
+            countryRepository.save(new Country("+230", "MUS", "MU", "Île Maurice", "Port Louis", afrique, "", "2 040 km2"));
+            countryRepository.save(new Country("+91", "IND", "IN", "Inde", "New Delhi", asie, "République de l'Inde", "3 287 263 km2"));
+            countryRepository.save(new Country("+62", "IDN", "ID", "Indonésie", "Jakarta", asie, "République d'Indonésie (PRm)", "1 910 931 km2"));
+            countryRepository.save(new Country("+964", "IRQ", "IQ", "Iraq/Irak", "Bagdad", asie, "République d'Iraq", "435 244 km2"));
+            countryRepository.save(new Country("+98", "IRN", "IR", "Iran", "Téhéran", asie, "République islamique d'Iran", "1 648 195 km2"));
+            countryRepository.save(new Country("+353", "IRL", "IE", "Irlande", "Dublin", europe, "", "70 273 km2"));
+            countryRepository.save(new Country("+354", "ISL", "IS", "Islande", "Reykjavik", europe, "République d'Islande", "103 000 km2"));
+            countryRepository.save(new Country("+972", "ISR", "IL", "Israël", "Jérusalem", asie, "État d'Israël", "22 072 km2"));
+            countryRepository.save(new Country("+39", "ITA", "IT", "Italie", "Rome", europe, "République italienne", "301 336 km2"));
+            countryRepository.save(new Country("+1-658/+1-876", "JAM", "JM", "Jamaïque", "Kingston", amerique, "", "10 991 km2"));
+            countryRepository.save(new Country("+81", "JPN", "JP", "Japon", "Tokyo", asie, "", "377 930 km2"));
+            countryRepository.save(new Country("+962", "JOR", "JO", "Jordanie", "Amman", asie, "Royaume hachémite de Jordanie (Lm)", "89 342 km2"));
+            countryRepository.save(new Country("+7", "KAZ", "KZ", "Kazakhstan", "Astana", asie, "République du Kazakhstan (PRm)", "2 724 910 km2"));
+            countryRepository.save(new Country("+254", "KEN", "KE", "Kenya", "Nairobi", afrique, "République du Kenya (PRm)", "580 367 km2"));
+            countryRepository.save(new Country("+996", "KGZ", "KG", "Kirghizistan", "Bichkek", asie, "République kirghize", "199 951 km2"));
+            countryRepository.save(new Country("+686", "KIR", "KI", "Kiribati", "Tarawa", oceanie, "République de Kiribati", "726 km2"));
+            countryRepository.save(new Country("+383", "", "", "Kosovo", "Pristina", europe, "", "10 887 km2"));
+            countryRepository.save(new Country("+965", "KWT", "KW", "Koweït", "Koweït", asie, "État du Koweït", "17 818 km2"));
+            countryRepository.save(new Country("+680", "LAO", "LA", "Laos", "Vientiane", asie, "République démocratique populaire lao", "236 800 km2"));
+            countryRepository.save(new Country("+266", "LSO", "LS", "Lesotho", "Maseru", afrique, "Royaume du Lesotho (Lm, PRm)", "30 355 km2"));
+            countryRepository.save(new Country("+371", "LVA", "LV", "Lettonie", "Riga", europe, "République de Lettonie", "64 559 km2"));
+            countryRepository.save(new Country("+961", "LBN", "LB", "Liban", "Beyrouth", asie, "République libanaise", "10 452 km2"));
+            countryRepository.save(new Country("+231", "LBR", "LR", "Liberia", "Monrovia", afrique, "République du Libéria", "111 369 km2"));
+            countryRepository.save(new Country("+218", "LBY", "LY", "Libye", "Tripoli", afrique, "État de Libye", "1 759 540 km2"));
+            countryRepository.save(new Country("+423", "LIE", "LI", "Liechtenstein", "Vaduz", europe, "Principauté du Liechtenstein (CNT, Lm, ONU, PRm, SQ) Principauté de Liechtenstein (OIT, SS, UE)", "160 km2"));
+            countryRepository.save(new Country("+370", "LTU", "LT", "Lituanie", "Vilnius", europe, "République de Lituanie (PRm)", "65 300 km2"));
+            countryRepository.save(new Country("+352", "LUX", "LU", "Luxembourg", "Luxembourg", europe, "Grand-Duché de Luxembourg", "2 586 km2"));
+            countryRepository.save(new Country("+389", "MKD", "MK", "Macédoine du Nord", "Skopje", europe, "République de Macédoine du Nord", "25 713 km2"));
+            countryRepository.save(new Country("+261", "MDG", "MG", "Madagascar", "Antananarivo", afrique, "République de Madagascar", "587 041 km2"));
+            countryRepository.save(new Country("+60", "MYS", "MY", "Malaisie", "Kuala Lumpur", asie, "Fédération de Malaisie (L, PR)", "587 041 km2"));
+            countryRepository.save(new Country("+265", "MWI", "MW", "Malawi", "Lilongwe", afrique, "République du Malawi (PRm)", "118 484 km2"));
+            countryRepository.save(new Country("+960", "MDV", "MV", "Maldives", "Malé", asie, "République des Maldives (PRm)", "300 km2"));
+            countryRepository.save(new Country("+223", "MLI", "ML", "Mali", "Bamako", afrique, "République du Mali (PRm)", "1 240 192 km2"));
+            countryRepository.save(new Country("+356", "MLT", "MT", "Malte", "La Valette", europe, "République de Malte (PRm)", "316 km2"));
+            countryRepository.save(new Country("+212", "MAR", "MA", "Maroc", "Rabat", afrique, "Royaume du Maroc (Lm, PRm)", "446 550 km2"));
+            countryRepository.save(new Country("+692", "MHL", "MH", "Marshall (Îles Marshall)", "Majuro", oceanie, "République des Îles Marshall", "181 km2"));
+            countryRepository.save(new Country("+222", "MRT", "MR", "Mauritanie", "Nouakchott", afrique, "République islamique de Mauritanie", "1 025 520 km2"));
+            countryRepository.save(new Country("+52", "MEX", "MX", "Mexique", "Mexico", amerique, "États-Unis mexicains (SS, UE) États-Unis du Mexique (L, OIT, ONU, SQ)", "1 964 375 km2"));
+            countryRepository.save(new Country("+691", "FSM", "FM", "Micronésie", "Palikir", oceanie, "États fédérés de Micronésie", "702 km2"));
+            countryRepository.save(new Country("+373", "MDA", "MD", "Moldavie", "Chisinau", europe, "République de Moldavie (CNT, L, PRm, UE) République de Moldova (OIT, ONU, SQ, SS)", "33 846 km2"));
+            countryRepository.save(new Country("+377", "MCO", "MC", "Monaco", "Monaco", europe, "Principauté de Monaco (Lm, PRm)", "2 km2"));
+            countryRepository.save(new Country("+976", "MNG", "MN", "Mongolie", "Oulan-Bator", asie, "", "1 564 100 km2"));
+            countryRepository.save(new Country("+382", "MNE", "ME", "Monténégro", "Podgorica", europe, "République du Monténégro (OIT)", "13 812 km2"));
+            countryRepository.save(new Country("+258", "MOZ", "MZ", "Mozambique", "Maputo", afrique, "République du Mozambique (PRm)", "801 590 km2"));
+            countryRepository.save(new Country("+264", "NAM", "NA", "Namibie", "Windhoek", afrique, "République de Namibie (PRm)", "824 268 km2"));
+            countryRepository.save(new Country("+674", "NRU", "NR", "Nauru", "Yaren", oceanie, "République de Nauru (PRm)", "21 km2"));
+            countryRepository.save(new Country("+977", "NPL", "NP", "Népal", "Katmandou", asie, "République démocratique fédérale du Népal (CNT, L, UE) République fédérale démocratique du Népal (OIT, ONU, SQ, SS)", "147 181 km2"));
+            countryRepository.save(new Country("+505", "NIC", "NI", "Nicaragua", "Managua", amerique, "République du Nicaragua", "130 373 km2"));
+            countryRepository.save(new Country("+227", "NER", "NE", "Niger", "Niamey", afrique, "République du Niger (PRm)", "1 267 000 km2"));
+            countryRepository.save(new Country("+234", "NGA", "NG", "Nigeria", "Abuja", afrique, "République fédérale du Nigéria", "923 768 km2"));
+            countryRepository.save(new Country("+47", "NOR", "NO", "Norvège", "Oslo", europe, "Royaume de Norvège (Lm, PRm)", "323 782 km2"));
+            countryRepository.save(new Country("+64", "NZL", "NZ", "Nouvelle-Zélande", "Wellington", oceanie, "", "270 467 km2"));
+            countryRepository.save(new Country("+968", "OMN", "OM", "Oman", "Mascate", asie, "Sultanat d'Oman (Lm, PRm)", "309 500 km2"));
+            countryRepository.save(new Country("+256", "UGA", "UG", "Ouganda", "Kampala", afrique, "République d'Ouganda (CNT, PR, UE) République de l'Ouganda (L, OIT, ONU, SQ, SS)", "241 550 km2"));
+            countryRepository.save(new Country("+998", "UZB", "UZ", "Ouzbékistan", "Tachkent", asie, "République d'Ouzbékistan (PRm)", "447 400 km2"));
+            countryRepository.save(new Country("+92", "PAK", "PK", "Pakistan", "Islamabad", asie, "République islamique du Pakistan", "796 095 km2"));
+            countryRepository.save(new Country("+680", "PLW", "PW", "Palaos", "Melekeok", oceanie, "République des Palaos", "459 km2"));
+            countryRepository.save(new Country("+970", "PSE", "PS", "Palestine", "Jérusalem-Est", asie, "État de Palestine territoire palestinien occupé (OIT) territoire relevant de l'Autorité palestinienne (OIT)", "6 020 km2"));
+            countryRepository.save(new Country("+507", "PAN", "PA", "Panama", "Panama", amerique, "République du Panama", "75 417 km2"));
+            countryRepository.save(new Country("+675", "PNG", "PG", "Papouasie-Nouvelle-Guinée", "Port Moresby", oceanie, "État indépendant de Papouasie-Nouvelle-Guinée (CNT, ONU, SQ) État indépendant de Papouasie - Nouvelle-Guinée (UE)", "462 840 km2"));
+            countryRepository.save(new Country("+595", "PRY", "PY", "Paraguay", "Asunción", amerique, "République du Paraguay (PRm)", "406 752 km2"));
+            countryRepository.save(new Country("+31", "NLD", "NL", "Pays-Bas", "Amsterdam", europe, "Royaume des Pays-Bas", "37 354 km2"));
+            countryRepository.save(new Country("+51", "PER", "PE", "Pérou", "Lima", amerique, "République du Pérou (PRm)", "1 285 216 km2"));
+            countryRepository.save(new Country("+63", "PHL", "PH", "Philippines", "Manille", asie, "République des Philippines (PRm)", "300 000 km2"));
+            countryRepository.save(new Country("+48", "POL", "PL", "Pologne", "Varsovie", europe, "République de Pologne (PRm)", "312 685 km2"));
+            countryRepository.save(new Country("+351", "PRI", "PR", "Portugal", "Lisbonne", europe, "République portugaise", "92 090 km2"));
+            countryRepository.save(new Country("+974", "QAT", "QA", "Qatar", "Doha", asie, "État du Qatar", "11 586 km2"));
+            countryRepository.save(new Country("+243", "COD", "CD", "République Démocratique du Congo", "Kinshasa", afrique, "République Démocratique du Congo", "2 345 409 km2"));
+            countryRepository.save(new Country("+1-809/+1-829/+1-849", "DOM", "DO", "République Dominicaine", "Saint-Domingue", amerique, "République Dominicaine", "48 671 km2"));
+            countryRepository.save(new Country("+40", "ROU", "RO", "Roumanie", "Bucarest", europe, "Roumanie", "238 391 km2"));
+            countryRepository.save(new Country("+44", "GBR", "GB", "Royaume-Uni(Grande-Bretagne)", "Londres", europe, "Royaume-Uni de Grande-Bretagne et d'Irlande du Nord", "242 900 km2"));
+            countryRepository.save(new Country("+7", "RUS", "RU", "Russie", "Moscou", europe, "Fédération de Russie", "17 125 191 km2"));
+            countryRepository.save(new Country("+250", "RWA", "RW", "Rwanda", "Kigali", afrique, "République du Rwanda", "26 338 km2"));
+            countryRepository.save(new Country("+1-869", "KNA", "KN", "Saint-Kitts-et-Nevis", "Basseterre", amerique, "Fédération de KNA KN Saint-Christophe-et-Niévès (CNT, PR, UE)", "261 km2"));
+            countryRepository.save(new Country("+1-721", "SMR", "SM", "Saint-Marin", "Saint-Marin", europe, "République de Saint-Marin (PRm)", "61 km2"));
+            countryRepository.save(new Country("+1-784", "VCT", "VC", "Saint-Vincent-et-les-Grenadines", "Kingstown", amerique, "Saint-Vincent-et-les-Grenadines", "389 km2"));
+            countryRepository.save(new Country("+1-758", "LCA", "LC", "Sainte-Lucie	", "Castries", amerique, "Sainte-Lucie	Castries", "539 km2"));
+            countryRepository.save(new Country("+677", "SLB", "SB", "Salomon(Îles Salomon )", "Honiara", oceanie, "", "28 896 km2"));
+            countryRepository.save(new Country("+503", "SLV", "SV", "Salvador(El Salvador)", "San Salvador", amerique, "République du Salvador (CNT, L, PRm) République d'El Salvador (OIT, SQ, SS, UE)", "21 041 km2"));
+            countryRepository.save(new Country("+1-684", "WSM", "WS", "Samoa", "Apia", oceanie, "État indépendant du Samoa", "2 842 km2"));
+            countryRepository.save(new Country("+239", "STP", "ST", "São Tomé et Príncipe", "São Tomé", afrique, "République démocratique de Sao Tomé-et-Principe", "964 km2"));
+            countryRepository.save(new Country("+221", "SEN", "SN", "Sénégal", "Dakar", afrique, "République du Sénégal (PRm)", "196 722 km2"));
+            countryRepository.save(new Country("+381", "SRB", "RS", "Serbie", "Belgrade", europe, "République de Serbie", "88 361 km2"));
+            countryRepository.save(new Country("+248", "SYC", "SC", "Seychelles", "Victoria", afrique, "République des Seychelles (PRm)", "452 km2"));
+            countryRepository.save(new Country("+232", "SLE", "SL", "Sierra Leone", "Freetown", afrique, "République de Sierra Leone (PRm)", "71 740 km2"));
+            countryRepository.save(new Country("+65", "SGP", "SG", "Singapour", "Singapour", asie, "République de Singapour (PRm)", "710 km2"));
+            countryRepository.save(new Country("+421", "SVK", "SK", "Slovaquie", "Bratislava", europe, "République slovaque", "49 037 km2"));
+            countryRepository.save(new Country("+386", "SVN", "SI", "Slovénie", "Ljubljana", europe, "République de Slovénie (PRm)", "20 273 km2"));
+            countryRepository.save(new Country("+252", "SOM", "SO", "Somalie", "Mogadiscio", afrique, "République fédérale de Somalie", "637 657 km2"));
+            countryRepository.save(new Country("+249", "SDN", "SD", "Soudan", "Khartoum", afrique, "République du Soudan (PRm)", "1 861 484 km2"));
+            countryRepository.save(new Country("+211", "SSD", "SS", "Soudan du Sud", "Djouba", afrique, "République du Soudan du Sud (PRm)", "644 329 km2"));
+            countryRepository.save(new Country("+94", "LKA", "LK", "Sri Lanka", "Sri Jayawardenapura", asie, "République socialiste démocratique de Sri Lanka", "65 610 km2"));
+            countryRepository.save(new Country("+46", "SWE", "SE", "Suède", "Stockholm", europe, "Royaume de Suède (Lm, PRm)", "450 295 km2"));
+            countryRepository.save(new Country("+41", "CHE", "CH", "Suisse", "Berne", europe, "Confédération suisse", "41 277 km2"));
+            countryRepository.save(new Country("+597", "SUR", "SR", "Suriname", "Paramaribo", amerique, "République du Suriname (PRm)", "163 820 km2"));
+            countryRepository.save(new Country("+963", "SYR", "SY", "Syrie", "Damas", asie, "République arabe syrienne", "185 180 km2"));
+            countryRepository.save(new Country("+992", "TJK", "TJ", "Tadjikistan", "Douchanbe", asie, "République du Tadjikistan", "143 100 km2"));
+            countryRepository.save(new Country("+886", "TWN", "TW", "Taïwan", "Taipei", asie, "Republique de Chine", "36 188 km2"));
+            countryRepository.save(new Country("+255", "TZA", "TZ", "Tanzanie", "Dodoma", afrique, "République-Unie de Tanzanie", "945 087 km2"));
+            countryRepository.save(new Country("+235", "TCD", "TD", "Tchad", "N'Djamena", afrique, "République du Tchad (PRm)", "1 284 000 km2"));
+            countryRepository.save(new Country("+420", "CZE", "CZ", "Tchèque", "Prague", europe, "République Tchèque", "78 865 km2"));
+            countryRepository.save(new Country("", "THA", "TH", "Thaïlande", "Bangkok", asie, "Royaume de Thaïlande (PRm)", "513 120 km2"));
+            countryRepository.save(new Country("+670", "TLS", "TL", "Timor-Oriental(Timor-Leste)", "Dili", oceanie, "République démocratique du Timor-Leste", "14 874 km2"));
+            countryRepository.save(new Country("+228", "TGO", "TG", "Togo", "Lomé", afrique, "République togolaise", "56 785 km2"));
+            countryRepository.save(new Country("+676", "TON", "TO", "Tonga", "Nukualofa", oceanie, "Royaume des Tonga", "747 km2"));
+            countryRepository.save(new Country("+1-868", "TTO", "TT", "Trinité-et-Tobago", "Port of Spain", amerique, "République de Trinité-et-Tobago", "5 130 km2"));
+            countryRepository.save(new Country("+216", "TUN", "TN", "Tunisie", "Tunis", afrique, "République Tunisienne", "163 610 km2"));
+            countryRepository.save(new Country("+993", "TKN", "TN", "Turkménistan", "Achgabat", asie, "République du Turkménistan (PR)", "488 100 km2)"));
+            countryRepository.save(new Country("+90", "TUR", "TR", "Turquie", "Ankara", asie, "République de Turquie (CNT, L, SS, UE) République turque (OIT, ONU, PR, SQ)", "783 562 km2"));
+            countryRepository.save(new Country("+688", "TUV", "TV", "Tuvalu", "Fanafuti", oceanie, "Tuvalu", "26 km2"));
+            countryRepository.save(new Country("+380", "UKR", "UA", "Ukraine", "Kiev", europe, "", "603 500 km2 (576 604 km2 sans la Crimée)"));
+            countryRepository.save(new Country("+598", "URY", "UY", "Uruguay", "Montevideo", amerique, "République orientale de l'Uruguay", "176 215 km2"));
+            countryRepository.save(new Country("+678", "VUT", "VU", "Vanuatu", "Port-Vila", oceanie, "République du Vanuatu (CNT, PR, SQ, UE) République de Vanuatu (L, OIT, ONU, SS)", "12 189 km2"));
+            countryRepository.save(new Country("+379", "VAT", "VA", "Vatican(Saint-Siège)", "Vatican", europe, "Saint-Siège (ONU, UE) État de la Cité du Vatican (CNT, L, OIT, PR, SQ, SS, UE)", "0,44 km2"));
+            countryRepository.save(new Country("+58", "VEN", "VR", "Venezuela", "Caracas", amerique, "République bolivarienne du Venezuela", "912 050 km2"));
+            countryRepository.save(new Country("+84", "VNM", "VN", "Viêt Nam", "Hanoi", asie, "République socialiste du Viet Nam", "331 212 km2"));
+            countryRepository.save(new Country("+967", "YEM", "YE", "Yémen", "Sanaa", asie, "République du Yémen (PRm)", "527 968 km2"));
+            countryRepository.save(new Country("+260", "ZMB", "ZM", "Zambie", "Lusaka", afrique, "République de Zambie (PRm)", "752 612 km2"));
+            countryRepository.save(new Country("+263", "ZWE", "ZW", "Zimbabwe", "Harare", afrique, "République du Zimbabwe", "390 757 km2"));
+
+        };
+    }
+
+}

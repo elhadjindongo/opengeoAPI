@@ -11,6 +11,7 @@ package com.opengeography.controllers;
 import com.opengeography.entities.Continent;
 import com.opengeography.services.ContinentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class ContinentController {
@@ -37,8 +41,11 @@ public class ContinentController {
     }
 
     @GetMapping("/continents/{id}")
-    public Continent getOne(@PathVariable Long id) {
-        return continentService.getOne(id);
+    public EntityModel<Continent> getOne(@PathVariable Long id) {
+        Continent continent = continentService.getOne(id);
+        return EntityModel.of(continent, //
+                linkTo(methodOn(ContinentController.class).getOne(id)).withSelfRel(),
+                linkTo(methodOn(ContinentController.class).getAll(continent.getName())).withSelfRel());
     }
 
 //    @GetMapping("/continents/{name}")

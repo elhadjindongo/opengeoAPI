@@ -13,25 +13,39 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Collection;
 
-@Data @ToString @NoArgsConstructor
+@Data
+@ToString
+@NoArgsConstructor
 @AllArgsConstructor
-@Entity @Table(name = "CONTINENT")
+@Entity
+@Table(name = "CONTINENT")
 public class Continent {
-   @Id @GeneratedValue
-   private Long id;
-   @Column(length = 100)
-   private String name;
-   @Column(length = 25)
-   private String area;
-   @Column(name = "total_countries")
-   private int totalCountries;
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column(length = 100)
+    private String name;
+    @Column(length = 25)
+    private String area;
+    @Column(length = 10, name = "area_percent")
+    private String areaPercent;
+    @Column(length = 10)
+    private String people; //population resident
+    @Column(length = 10, name = "people_percent")
+    private String peoplePercent; //pourcentage par rapport a la population mondiale
+    private double density; // densite de la population au km2
+    @Column(name = "total_countries")
+    private int totalCountries;
 
 
-   public Continent(String name, String area, int totalCountries) {
-      this.name = name;
-      this.area = area;
-      this.totalCountries = totalCountries;
-   }
+    public Continent(String name, String area, String areaPercent, String people, String peoplePercent, double density, int totalCountries) {
+        this.name = name;
+        this.area = area;
+        this.areaPercent = areaPercent;
+        this.people = people;
+        this.peoplePercent = peoplePercent;
+        this.density = density;
+        this.totalCountries = totalCountries;
+    }
 }

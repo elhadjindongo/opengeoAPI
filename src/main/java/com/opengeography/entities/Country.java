@@ -28,15 +28,17 @@ public class Country {
    private String codeAlpha2;
    @Column(name = "code_alpha3",length = 3)
    private String codeAlpha3;
-   @Column(length = 8)
+   @Column(length = 20)
    private String phone; // indicatif telephonique | Phone prefix
    @Column(name = "capital_city",length = 100)
    private String capitalCity;
+   @Column(length = 100)
+   private String area; //superficie
 
    @ManyToOne
    public Continent continent;
 
-   public Country(String name, String fullName, String codeAlpha2, String codeAlpha3, String phone, String capitalCity, Continent continent) {
+   public Country(String phone,String codeAlpha3, String codeAlpha2,String name,String capitalCity, Continent continent, String fullName, String area) {
       this.name = name;
       this.fullName = fullName;
       this.codeAlpha2 = codeAlpha2;
@@ -44,5 +46,7 @@ public class Country {
       this.phone = phone;
       this.capitalCity = capitalCity;
       this.continent = continent;
+      this.area = area;
    }
+
 }

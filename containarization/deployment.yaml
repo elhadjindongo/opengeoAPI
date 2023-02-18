@@ -1,0 +1,85 @@
+#Creation du namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-opengeo
+
+---
+#Definition des limites des ressources cpu et ram
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-limit-range
+  namespace: ns-opengeo
+spec:
+  limits:
+  - default:
+      cpu: 1
+      memory: 512Mi
+    defaultRequest:
+      cpu: 0.5
+      memory: 512Mi
+    type: Container
+
+---
+#Creation du container
+apiVersion: v1
+kind: Pod
+metadata:
+  name: opengeo-app
+  namespace: ns-opengeo
+spec:
+  containers:
+  - name: opengeo-app
+    image: opengeo-app:1.0.0
+---
+#Creation du deploiement
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opengeo-deployment
+  labels:
+    app: opengeo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opengeo-app
+  template:
+    metadata:
+      labels:
+        app: opengeo-app
+    spec:
+      containers:
+        - name: opengeo-app
+          image: opengeo-app:1.0.0
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: opengeo-service
+  name: opengeo-service
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: opengeo-app
+
+#kubectl create -f deployment.yaml
+#kubectl get replicaset
+#kubectl get pod
+#kubectl rollout status deployment
+#kubectl get pods --show-labels
+#kubectl edit opengeo-deployment
+#kubectl rollout history opengeo-deployment
+#kubectl scale opengeo-deployment --replicas=3
+
+
+#https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#creating-a-deployment
+
